@@ -77,7 +77,7 @@ impl Display for Instruction {
         }
         write!(
             f,
-            "Code: {:?}\n{}\nTotal size: {}",
+            "Code: {:?}\n{}Total size: {}",
             self.code, d, total_size
         )
     }
@@ -187,7 +187,7 @@ fn main() -> io::Result<()> {
     );
 
     for inst in instructions.iter() {
-        println!("{}", inst);
+        println!("{}\n", inst);
     }
 
     Ok(())
