@@ -1,0 +1,2 @@
+[workspace]
+members = ["parser_8086", "macros_8086"]
