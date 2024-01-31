@@ -33,7 +33,7 @@ enum SubInstructionCode {
     REG,
     RM,
 }
- 
+
 struct SubInstruction {
     code: SubInstructionCode,
     size: u8,
@@ -75,7 +75,11 @@ impl Display for Instruction {
             d += &format!("{}\n", sub);
             total_size += sub.size;
         }
-        write!(f, "Code: {:?}\n{}\nTotal size: {}", self.code, d, total_size)
+        write!(
+            f,
+            "Code: {:?}\n{}\nTotal size: {}",
+            self.code, d, total_size
+        )
     }
 }
 
@@ -139,6 +143,8 @@ macro_rules! ImpD {
 
 macro_rules! x86 {
     ($arr:ident, $code:ident, $( $sub:expr ),* ) => {
+        {
+
         let mut subs: Vec<SubInstruction> = vec![];
 
         $( subs.push($sub); )*
@@ -147,11 +153,12 @@ macro_rules! x86 {
         $code,
         subs,
     ));
+    }
     };
 }
 
 fn main() -> io::Result<()> {
-    use InstructionCode::{PUSH, MOV};
+    use InstructionCode::{MOV, PUSH};
 
     // let bytes = fs::read("listing_0037_single_register_mov").unwrap();
 
@@ -178,7 +185,6 @@ fn main() -> io::Result<()> {
         ImpW!(1),
         ImpD!(1)
     );
-   
 
     for inst in instructions.iter() {
         println!("{}", inst);
